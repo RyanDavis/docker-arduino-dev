@@ -1,0 +1,25 @@
+services:
+  arduino-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: arduino-dev
+    volumes:
+      - ./projects:/workspace/projects
+      - ./libraries:/workspace/libraries
+      - arduino_config:/root/.arduino15
+      - arduino_cache:/root/.cache/arduino
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    privileged: true
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/ttyACM0:/dev/ttyACM0
+    environment:
+      - ARDUINO_CLI_CONFIG_FILE=/root/.arduino15/arduino-cli.yaml
+    command: /bin/bash
+
+volumes:
+  arduino_config:
+  arduino_cache:
