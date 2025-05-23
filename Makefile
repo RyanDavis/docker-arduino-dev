@@ -2,6 +2,7 @@
 
 # Default values
 BOARD ?= esp32:esp32:esp32c3
+OPTIONS ?= :CDCOnBoot=cdc
 PORT ?= /dev/ttyUSB0
 SKETCH ?= ./projects/blink
 
@@ -32,11 +33,11 @@ clean:
 # Arduino specific commands
 compile:
 	@echo "Compiling sketch: $(SKETCH)"
-	docker compose exec -T arduino-cli arduino-cli compile -b $(BOARD) $(SKETCH)
+	docker compose exec -T arduino-cli arduino-cli compile -b $(BOARD)$(OPTIONS) $(SKETCH)
 
 upload:
 	@echo "Uploading sketch: $(SKETCH) to $(PORT)"
-	docker compose exec -T arduino-cli arduino-cli upload -b $(BOARD) -p $(PORT) $(SKETCH)
+	docker compose exec -T arduino-cli arduino-cli upload -b $(BOARD)$(OPTIONS) -p $(PORT) $(SKETCH)
 
 monitor:
 	@echo "Opening serial monitor on $(PORT)"
@@ -111,5 +112,6 @@ help:
 	@echo ""
 	@echo "Variables:"
 	@echo "  BOARD=$(BOARD)"
+	@echo "  OPTIONS=$(OPTIONS)"
 	@echo "  PORT=$(PORT)"
 	@echo "  SKETCH=$(SKETCH)"
