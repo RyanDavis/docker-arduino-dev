@@ -7,6 +7,7 @@ services:
     volumes:
       - ./projects:/workspace/projects
       - ./libraries:/workspace/libraries
+      - ./arduino-cli.yaml:/root/.arduino15/arduino-cli.yaml
       - arduino_config:/root/.arduino15
       - arduino_cache:/root/.cache/arduino
     working_dir: /workspace

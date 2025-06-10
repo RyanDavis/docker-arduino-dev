@@ -3,7 +3,7 @@
 # Default values
 BOARD ?= esp32:esp32:esp32c3
 OPTIONS ?= :CDCOnBoot=cdc
-PORT ?= /dev/ttyUSB0
+PORT ?= /dev/ttyACM0
 SKETCH ?= ./projects/blink
 
 # Docker compose commands
